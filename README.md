@@ -8,9 +8,9 @@ This project involves the the use of machine learning algorithms to predict the 
 - Can machine learning be used to predict whether weather conditions will be favourable on a certain day?
 ## Project Goals
 - Identify weather patterns that deviate from Europe's normal weather patterns
-- Ascertain if there is a constant increase in the unusual weather patterns
+- Ascertain if there is an increase in frequency of unusual weather patterns
 - Determine what weather conditions may look like over the next 25-50 years using current trends
-- Identify the safest to live areas in Europe within the next 25-50 years
+- Identify the safest-to-live areas in Europe over the next 25-50 years
 ## Hypotheses
 - If temperatures increase every year, then extreme weather events will also increase.
 - Machine learning algorithms will accurately predict if the weather on a day is pleasant or unpleasant.
@@ -41,7 +41,7 @@ This dataset contains data indicating if the weather on each date was pleasant o
 - Time: For performing time-related functions.
 - Scikeras: For using Sklearn with Keras/Tensorflow.
 - Math: For giving access to standard mathematical constants and functions.
-- Bayes_opt: For running Bayesian optimization.
+- Bayes_opt: For running Bayesian Optimization.
 - PIL: For image processing and manipulation.
 ## Techniques
 The following techniques were used in this project:
@@ -82,27 +82,35 @@ From supervised machine learning algorithms, I moved onto unsupervised machine l
 
 <img width="1660" height="661" alt="image" src="https://github.com/user-attachments/assets/0cb4cb07-309a-4e2c-ad6f-408a0218644e" />
 
-Then, I used the Recurrent Neural Networks mode. Prior to running this model, I removed all columns for Gdansk, Roma, and Tours from the temperature data set to match the pleasant weather data set, removed all columns for wind speed and snow depth since most weather stations did not have these columns, and created the Kassel_cloud_cover, Stockholm_humidity, and Munchenb_pressure columns by copying columns from closeby weather statins with similar climate. To run this model, I reshaped it, split the data into training and testing data, created the Keras model, compiled, and ran the model, and generated confusion matrices. I ran 12 tests on the model using different hyperparameters until the model converged (accuracy increased and loss decreased). The accuracy of the model was 25.4% and lost was 8.8765. The following image shows the final confusion matrix which recognized 7 out of 15 weather stations:
+Then, I used the Recurrent Neural Networks model. Prior to running this model, I removed all columns for Gdansk, Roma, and Tours from the temperature data set to match the pleasant weather data set, removed all columns for wind speed and snow depth since most weather stations did not have these columns, and created the Kassel_cloud_cover, Stockholm_humidity, and Munchenb_pressure columns by copying columns from nearby weather stations with similar climates. To run this model, I reshaped it, split the data into training and testing sets, created the Keras model, compiled the model, ran the model, and generated confusion matrices. I ran 12 tests on the model using different hyperparameters until the model converged (accuracy increased and loss decreased). The accuracy of the model was 25.4% and loss was 8.8765. The following image shows the final confusion matrix which recognized 7 out of 15 weather stations:
 
 <img width="811" height="449" alt="image" src="https://github.com/user-attachments/assets/537e3575-cd3a-4326-8763-d2b70efc1209" />
 
-I then used the Random Forest algorithm. To implement this algorithm, I reshaped the data, split the data into training and testing sets, ran the model, and obtained the feature importances of the whole data set, and of each of the top three most important weather stations (Kassel, Belgrade, and Valentia). The following image shows a bar chart with the feature importances for the whole data set:
+I then used the Random Forests algorithm. To implement this algorithm, I reshaped the data, split the data into training and testing sets, ran the model, and obtained the feature importances of the whole data set, and of each of the top three most important weather stations (Kassel, Belgrade, and Valentia). The following image shows a bar chart with the feature importances for the whole data set:
 
 <img width="648" height="600" alt="image" src="https://github.com/user-attachments/assets/201086ae-a46e-402e-a42d-c9d5941d03ec" />
 
-To obtain optimized hyperparameters for the Random Forest model, I reduced the temperature and pleasant weather data sets to only include data from 2011-2021, reshaped the data, split the data into training and testing sets, then ran Grid Search and Random Search to see which one had the best score. I used the hyperparameters from the search method with the highest score to run the Random Forest model and obtain feature importances of the data set. Munchenb, Ljubljana, and Budapest were the top three most important weather stations which was different than before optimization. The following image shows a bar chart with the feature importances of the data set from 2011-2021 after optimization:
+To obtain optimized hyperparameters for the Random Forests model, I reduced the temperature and pleasant weather data sets to only include data from 2011-2021, reshaped the data, split the data into training and testing sets, then ran Grid Search and Random Search to see which one had the best score. I used the hyperparameters from the search method with the highest score to run the Random Forests model and obtain feature importances of the data set. Munchenb, Ljubljana, and Budapest were the top three most important weather stations, which was different than before optimization. The following image shows a bar chart with the feature importances of the data set from 2011-2021 after optimization:
 
 <img width="689" height="599" alt="image" src="https://github.com/user-attachments/assets/ce7e51c3-b325-4813-9db3-59a8f575ff95" />
 
-To obtain optimized hyperparameters for the Deep Learning model, I reshaped the data, split it into training and testing sets, ran the Bayesian optimization function, ran the Recurrent Neural Networks model using the optimized hyperparameters, and generated a confusion matrix. The accuracy of the model after optimization was 8.3% which was lower than the accuracy before optimization. The following image shows the confusion matrix which recognized 14 out of 15 weather stations:
+To obtain optimized hyperparameters for the Deep Learning model, I reshaped the data, split it into training and testing sets, ran Bayesian Optimization, ran the Recurrent Neural Networks model using the optimized hyperparameters, and generated a confusion matrix. The accuracy of the model after optimization was 8.3% which was lower than the accuracy before optimization. The following image shows the confusion matrix which recognized 14 out of 15 weather stations:
 
 <img width="520" height="787" alt="image" src="https://github.com/user-attachments/assets/0ceb0195-e042-4907-9dc8-ac5255d2a132" />
 
 The last algorithm that was used was Convolutional Neural Networks. For this model, I used a collection of photos which were separated into four categories: cloudy, rain, shine, and sunrise. I then compiled and ran this model, then tested to see how it would categorize a random number of photos.
 
 ## Results and Recommendations
+Unsupervised Machine Learning Algorithms:
 - The KNN algorithm has the highest accuracy rate of the three supervised machine learning algorithms with an accuracy rate of 89%.
 - Additionally, KNN's accuracy rate is significantly higher than the accuracy rates for the Decision Tree and ANN algorithms.
 - To make weather predictions in Europe, ClimateWins should use the KNN algorithm.
+
+I generated three thought experiments that can be used to achieve ClimateWins' goals of using machine learning to predict the consequences of climate change in Europe:
+- Identifying the safest places in Europe using Random Forests: Integrate data on sea levels, extreme weather events, and injuries and deaths due to extreme weather. Model will categorize regions by safety for the next 25-50 years.
+- Predicting future weather conditions using LSTM: Obtain weather predictions for the next 25-50 years by training an LSTM model using past and current weather data including extreme weather event data.
+- Identifying unusual weather patterns using Hierarchical Clustering: Current and past weather data and extreme weather event data can be used to identify any anomalies in weather patterns across Europe.
+
+Of these three thought experiments, I recommend using the first one which will identify the safest places in Europe to live in within the next 25-50 years using Random Forests. I believe this thought experiment has the most potential because Random Forests prevents overfitting, it will not only fulfill ClimateWins’ goal of identifying the safest regions for people to live in within the next 25-50 years, but will also give an idea of which regions are affected the most by climate change, and it will likely produce the most accurate results as it will likely have the highest accuracy rate.
 ## Contact
 If you would like more details about the project, or if you have any questions, please feel free to contact me through [LinkedIn](https://www.linkedin.com/in/priya-agrawal-0929) or [email](mailto:priya.agrawal0929@gmail.com).
